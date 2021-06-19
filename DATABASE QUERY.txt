@@ -1,0 +1,254 @@
+use Practice;
+SELECT SALARY FROM Worker
+select TOP 1 SALARY from (SELECT distinct TOP 2 salary from Worker order by salary desc) order by SALARY Asc ;
+select salary from Worker;
+select max(salary) as salary from Worker where SALARY <(select max(salary) as salary from Worker
+where SALARY <(select max(salary) as salary from Worker)); 
+select max(salary) as salary from Worker where SALARY <(select max(salary) as salary from Worker);
+select max(salary) as salary from Worker where SALARY <(select max(salary) as salary from Worker
+where SALARY <(select max(salary) as salary from Worker where SALARY <(select max(salary) as salary from Worker)));
+
+
+SELECT Salary
+FROM Worker W1
+WHERE 4 = (
+ SELECT COUNT( DISTINCT ( W2.Salary ) )
+ FROM Worker W2
+ WHERE W2.Salary >= W1.Salary
+
+
+ 
+ );
+
+ SELECT * from worker;
+ select concat(FIRST_NAME,' ',LAST_NAME) AS NAME,count(*) from Worker group by salary having count(*)>1 ;
+  select count(*) from worker group by salary having count(*)>1 ;;
+  select SALARY from worker group by SALARY having count(*)>1;
+
+  select concat(FIRST_NAME,' ',LAST_NAME) AS NAME,SALARY from worker where SALARY in (select SALARY from worker group by SALARY having count(*)>1);
+
+
+  select * from Worker;
+
+
+  select FIRST_NAME,DEPARTMENT from Worker where DEPARTMENT ='HR'
+  union all 
+  select FIRST_NAME,DEPARTMENT from Worker where DEPARTMENT ='HR'
+
+    select FIRST_NAME,DEPARTMENT from Worker where DEPARTMENT ='HR'
+  intersect
+  select FIRST_NAME,DEPARTMENT from Worker where DEPARTMENT ='HR'
+
+   select * from Worker
+   
+   Select department,count(*) from worker group by DEPARTMENT having count(*)<5;
+      Select department,count(FIRST_NAME) from worker group by DEPARTMENT having count(FIRST_NAME)<5;
+
+	  Select department,count(WORKER_ID) from worker group by DEPARTMENT;
+
+	  SELECT * FROM WORKER WHERE WORKER_ID IN (SELECT MAX(WORKER_ID) FROM WORKER);
+	  select * from worker where WORKER_ID NOT IN (SELECT TOP 3 WORKER_ID FROM WORKER) 
+
+	  select DEPARTMENT FROM Worker GROUP BY DEPARTMENT;
+	  select SALARY FROM Worker WHERE DEPARTMENT IN (select DEPARTMENT FROM Worker GROUP BY DEPARTMENT) 
+
+
+	  --HIGHEST SALARY OF EACH DEPARTMENT
+SELECT t.DEPARTMENT,t.FIRST_NAME,t.Salary from(SELECT max(Salary) as TotalSalary,DEPARTMENT from Worker group by DEPARTMENT) as TempNew 
+Inner Join Worker t on TempNew.DEPARTMENT=t.DEPARTMENT 
+ and TempNew.TotalSalary=t.Salary;
+ 
+ --Write an SQL query to fetch three max salaries from a table.
+ SELECT distinct Salary from worker a WHERE 3 >= (SELECT count(distinct Salary) from worker b WHERE a.Salary <= b.Salary) order by a.Salary desc;     
+ 
+      --Write an SQL query to fetch three min salaries from a table.
+SELECT distinct Salary from worker a WHERE 3 >= (SELECT count(distinct Salary) from worker b WHERE a.Salary >= b.Salary) order by a.Salary desc;
+
+--Write an SQL query to fetch nth max salaries from a table.
+SELECT distinct Salary from worker a WHERE n >= (SELECT count(distinct Salary) 
+from worker b WHERE a.Salary <= b.Salary) order by a.Salary desc;
+ 
+ -- Write an SQL query to fetch departments along with the total salaries paid for each of them
+ SELECT SUM(SALARY) as TOTAL,DEPARTMENT FROM WORKER GROUP BY DEPARTMENT
+ --HIGHEST SALARY OF EACH DEPARTMENT
+  SELECT max(SALARY) as TOTAL,DEPARTMENT FROM WORKER GROUP BY DEPARTMENT
+  --Write an SQL query to fetch the names of workers who earn the highest salary
+  SELECT SALARY,FIRST_NAME FROM WORKER WHERE SALARY IN( SELECT MAX(SALARY) FROM WORKER)
+   SELECT MAX(SALARY) FROM WORKER
+    select * from Worker
+
+
+	-- Write an SQL query to fetch nth max salaries from a table.
+	SELECT distinct Salary from worker a WHERE N >= (SELECT count(distinct Salary) 
+	from worker b WHERE a.Salary <= b.Salary) order by a.Salary desc;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TRIGGER Trigger_Name  
+ON DATABASE  
+FOR CREATE_TABLE,ALTER_TABLE,DROP_TABLE  
+AS  
+BEGIN  
+<Trigger Body>  
+END
+-------------------------------------------------------------------------------trigger------------------------------
+USE HP
+
+CREATE TRIGGER TEMP
+ON employee
+after insert
+
+
+AS
+BEGIN
+
+insert into country values(1,'pak');
+END
+
+
+USE HP
+SELECT * FROM country
+SELECT * FROM employee
+insert into employee values(3,'AZIZ','ART',33,444,22);
+
+
+
+
+------------------------------------------store producer---------------------------------
+CREATE PROCEDURE TEMP_PAGE
+AS
+SELECT cid FROM country union all SELECT empid FROM employee
+
+
+GO;
+
+drop PROCEDURE TEMP_PAGE
+
+EXEC TEMP_PAGE;
+
+
+---------------------------------------view--------------------------------------------
+CREATE VIEW [Brazil Customers] AS
+SELECT * FROM employee
+drop view [Brazil Customers] 
+
+
+
+
+SELECT * FROM [Brazil Customers] 
+SELECT * FROM [Brazil Customers] where empid=2;
+
+
+
+
+
+
+
+
+
+
+/****** Script for SelectTopNRows command from SSMS  ******/
+use EXPRESS
+--create table employee(empid int primary key,empname varchar(100), department varchar(50),
+--contactno bigint, emaildid varchar(100), empheadid int)
+--create table empdept(deptid varchar(50) primary key,deptname varchar(100), dept_off varchar(100), 
+--depthead int foreign key references employee(empid))
+--create table empsalary(empid int foreign key references employee(empid), salary bigint, ispermanent varchar(3))
+----create table project(projectid varchar(50) primary key, duration int)
+--create table country(cid varchar(50) primary key, cname varchar(100))
+--create table clienttable(clientid varchar(50) primary key, clientname varchar(100), 
+--cid varchar(50) references country(cid))
+--create table empproject(empid int foreign key references employee(empid), projectid varchar(50) 
+--foreign key references project(projectid), clientid varchar(50) foreign key references clienttable(clientid),startyear int, endyear int)
+--create table empdept(deptid varchar(50) primary key,deptname varchar(100), dept_off varchar(100), 
+--depthead int foreign key references employee(empid))
+--create table empsalary(empid int foreign key references employee(empid), salary bigint, ispermanent varchar(3))
+--create table project(projectid varchar(50) primary key, duration int)
+--create table country(cid varchar(50) primary key, cname varchar(100))
+--create table empproject1(empid int foreign key references employee(empid), 
+--projectid varchar(50), clientid varchar(50),startyear int, endyear int)
+
+
+
+--SELECT * FROM employee where empname like 'p%'; 
+--Select count(empid) from empsalary where salary=5000 and ispermanent="Yes";
+--SELECT count(empid) as count FROM empsalary where salary>5000 and ispermanent='Yes';
+--SELECT * FROM employee where emaildid like'%@gmail.com';
+--SELECT * FROM employee where department='E-104' OR department='E-102';
+--SELECT * FROM employee where department IN ('E-104','E-102');
+--SELECT deptname from empdept where deptid='E-101';
+--SELECT SUM(salary) AS SALARY from empsalary where ispermanent ='Yes';
+--SELECT * FROM employee where empname like '%a';
+--SELECT count(empid) AS COUNTS,projectid  FROM empproject1 group by projectid;
+--SELECT COUNT(projectid) AS NUMBER_PROJECT from empproject1 group by startyear having startyear=2010;
+--SELECT COUNT(projectid) AS NUMBER_PROJECT from empproject1 where  startyear=2010;
+--select count(projectid) AS PROJECT from empproject1 where startyear=2010 and endyear=2010;
+--select empname from employee where empname like '__h%';
+--SELECT deptname from empdept where depid IN (100);
+--SELECT deptname from empdept where deptid IN(select department from employee where empid>103);
+--SELECT deptname from empdept inner join employee on deptid=department where empid>103; 
+--select empname from employee where empheadid = (select empid from employee where empname='abhishek');
+--SELECT empname from employee where department=(select deptid from empdept where deptname='HR');
+--SELECT empname from employee where empid=(select depthead from empdept where deptname='HR');
+Select empname from employee where empid in (select empheadid from employee) AND empid in (select empid from empsalary where ispermanent='yes');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/****** Script for SelectTopNRows command from SSMS  ******/
+use EXPRESS
+--Select empname,emaildid from employee where empid in(select empid from empsalary where ispermanent='no' ) and empid in(select depthead from empdept);
+--Select * from(( employee inner join empsalary on employee.empid=empsalary.empid)inner join empdept on employee.empheadid=empdept.depthead)where ispermanent='no';
+
+--Select empname,emaildid from employee inner join empsalary on employee.empid=empsalary.empid;
+--Select * from employee where department in(select deptid from empdept where dept_off='monday');
+--select * from clienttable where cid in(select cid from country where cname='India');
+--select * from country where cname='India';
+--select * from clienttable inner join country on clienttable.cid=country.cid where cname='India';
+--select * from employee where department in(select deptid from empdept where deptname='Development');
+
+
+
+
+
+
+
+
+
+
+
+
